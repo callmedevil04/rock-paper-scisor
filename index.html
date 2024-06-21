@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissor</title>
+   
+</head>
+<body>
+    <p>
+        Play against the computer 
+    </p>
+    <button onclick="pickComputerMove('rock');">ROCK</button>
+    <button onclick="pickComputerMove('scissor');">SCISSOR</button>
+    <button onclick="pickComputerMove('paper');">PAPER</button>
+
+    <p class="score"></p>
+
+    </p>
+    <button onclick="reset()">reset score</button>
+
+    <script>
+        let computerMove = '';
+        let result = '';
+        const score = { win: 0, loss: 0, tie: 0 };
+
+        function pickComputerMove(userMove) {
+            const randomNumber = Math.random();
+
+            if (randomNumber < 1/3)
+                computerMove = 'rock';
+            else if (randomNumber < 2/3)
+                computerMove = 'paper';
+            else
+                computerMove = 'scissor';
+
+            if (userMove === 'rock') {
+                if (computerMove === 'rock') {
+                    result = 'Tie';
+                    score.tie++;
+                } else if (computerMove === 'paper') {
+                    result = 'U LOSE';
+                    score.loss++;
+                } else if (computerMove === 'scissor') {
+                    result = 'U WON';
+                    score.win++;
+                }
+            } else if (userMove === 'scissor') {
+                if (computerMove === 'rock') {
+                    result = 'U LOSE';
+                    score.loss++;
+                } else if (computerMove === 'paper') {
+                    result = 'U WON';
+                    score.win++;
+                } else if (computerMove === 'scissor') {
+                    result = 'TIE';
+                    score.tie++;
+                }
+            } else if (userMove === 'paper') {
+                if (computerMove === 'rock') {
+                    result = 'U WON';
+                    score.win++;
+                } else if (computerMove === 'paper') {
+                    result = 'TIE';
+                    score.tie++;
+                } else if (computerMove === 'scissor') {
+                    result = 'U LOSE';
+                    score.loss++;
+                }
+            }
+            document.querySelector('.score').innerHTML=`Computer chose ${computerMove}. 
+            ${result}. 
+            Wins: ${score.win}, Losses: ${score.loss}, Ties: ${score.tie}`;
+                    }
+
+        function reset()
+        {
+            score.win=score.loss=score.tie=0;
+            document.querySelector('.score').innerHTML=`
+            Wins: ${score.win}, Losses: ${score.loss}, Ties: ${score.tie}`;
+        }
+        
+      
+    </script>
+</body>
+</html>
